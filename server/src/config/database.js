@@ -13,6 +13,6 @@ mongoose.connect(MONGODB_URI, {
     useFindAndModify: false,
 })
     .then(() => {
-        console.log(`Database is Connected! [MONGODB]`)
+        console.log(`Database is Connected! [MONGODB]\n================================`)
     })
     .catch(err => console.error(err))

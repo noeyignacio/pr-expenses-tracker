@@ -9,6 +9,7 @@ dotenv.config();
 const app = express();
 
 // Routes
+import transactionRoutes from '../routes/transaction.route.js'
 
 /* Server Settings */
 // Local Port
@@ -20,5 +21,8 @@ app.use(bodyParser.json({extended: true}));
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(cors());
 app.use(morgan('tiny'));
+
+// API(s) Routes
+app.use('/api/v1/transaction', transactionRoutes)
 
 export default app;
