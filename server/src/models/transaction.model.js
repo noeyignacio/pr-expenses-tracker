@@ -1,10 +1,13 @@
 import mongoose from 'mongoose';
 
 const TransactionSchema = new mongoose.Schema({
-    value: {
+    amount: {
         type: Number,
         required: true,
     },
+    isAdded: {
+        type: Boolean,
+    }
 }, {
     timestamps: true,
 })

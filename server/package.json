@@ -5,8 +5,9 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "start:backend": "nodemon src/index.js",
-    "dev:watch": "concurrently -n 'SERVER,CLIENT' -c'red,blue' \"npm run start:backend\" \"cd .. && cd client && npm run dev\""
+    "start:server": "nodemon src/index.js",
+    "start:client" : "cd .. && cd client && npm run dev",
+    "dev:watch": "concurrently -n 'SERVER,CLIENT' -c 'red,blue' \"npm run start:server\" \"npm run start:client\""
   },
   "author": "Francis Ignacio",
   "license": "ISC",
