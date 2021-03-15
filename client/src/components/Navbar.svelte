@@ -1,11 +1,17 @@
 <script>
-
+    const src = 'money-icon.png'
 </script>
 
-<nav class="uk-navbar-container uk-margin" uk-navbar>
-    <div class="uk-navbar-center">
-        <div class="uk-navbar-center-left"></div>
-        <a class="uk-navbar-item uk-logo" href="/">Expenses Tracker</a>
-        <div class="uk-navbar-center-right"></div>
+<!-- Image and text -->
+<nav class="navbar navbar-light">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">
+        <img {src} alt="logo" width="30" height="24" class="d-inline-block align-top">
+        Expenses Tracker
+        </a>
     </div>
 </nav>
+
+<style>
+    
+</style>
