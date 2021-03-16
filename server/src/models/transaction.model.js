@@ -7,9 +7,16 @@ const TransactionSchema = new mongoose.Schema({
     },
     isAdded: {
         type: Boolean,
+    },
+    isExpenses: {
+        type: Boolean,
+    },
+    isIncome: {
+        type: Boolean,
+    },
+    createdAt: {
+        type: Date,
     }
-}, {
-    timestamps: true,
 })
 
 export default mongoose.model("Transaction", TransactionSchema)

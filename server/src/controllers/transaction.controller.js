@@ -41,6 +41,8 @@ export const createTransaction = async(req, res) => {
     try {
         const newTransaction = new Transaction({
             amount: req.body.amount,
+            isExpenses: req.body.isExpenses,
+            isAdded: true,
         })
         const transaction = await createTransactionValidator.validateAsync(req.body)
         if (transaction) {
@@ -52,7 +54,8 @@ export const createTransaction = async(req, res) => {
                     // Web Response
                     res.status(200).json({
                         amount: req.body.amount,
-                        isAdded: true,
+                        isAdded: req.body.isAdded,
+                        isExpenses: req.body.isExpenses,
                         message: "Transaction Created Successfully."
                     })
                 })
