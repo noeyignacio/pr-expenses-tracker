@@ -6,18 +6,18 @@
 
     let input;
     let transactions = [];
-    let method = "Expenses";
+    let method;
 
     const addTransactions = async () => {
         try {
             const transaction = {
                 createdAt: new Date().getDate(),
                 amount: input,
-                
+                transactionMethod: method
             };
             const response = await axios.post("/api/v1/transaction/create", transaction);
             transactions = [response.data, ...transactions]
-            input = "";
+            input = 0;
         } catch (error) {
             console.log(error)
         }

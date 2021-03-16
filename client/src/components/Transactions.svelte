@@ -15,18 +15,18 @@
     });
 </script>
 
-
+<br>
 <div class="row">
     {#each transactions as transaction}
     <div class="col-sm-6">
-        <div class="card">
+        <div class="card border-dark mb-3">
             <div class="card-body">
             <h5 class="card-title">
                 Amount: $ {transaction.amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}.00
-                {#if transaction.isExpenses == true}
-                    <span class="badge bg-warning">Expenses</span>
+                {#if transaction.transactionMethod == "Expenses"}
+                    <span class="badge rounded-pill bg-warning">Expenses</span>
                         {:else}
-                        <span class="badge bg-info">Income</span>
+                        <span class="badge rounded-pill bg-info">Income</span>
                 {/if}
             </h5>
             <p class="card-text tranid">Transaction ID: 
@@ -35,7 +35,7 @@
             <p class="card-text text-muted">
                 Date: {transaction.createdAt}
             </p>
-            <a href="/" class="btn btn-danger">Remove</a>
+            <a href="/" class="btn-sm btn-danger">Remove</a>
             </div>
         </div>
         
@@ -45,8 +45,14 @@
 
 
 <style>
-    .card {
+    /* .card {
         border: none
+    } */
+    .row {
+        padding: 20px 0 20px 0;
+    }
+    span {
+        font-size: 12px;
     }
     a {
         color: #ffffff;
