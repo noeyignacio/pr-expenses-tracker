@@ -8,14 +8,14 @@ const TransactionSchema = new mongoose.Schema({
     isAdded: {
         type: Boolean,
     },
-    isExpenses: {
-        type: Boolean,
-    },
-    isIncome: {
-        type: Boolean,
+    transactionMethod: {
+        type: String,
+        choices: ["Expenses", "Income"],
+        required: true
     },
     createdAt: {
         type: Date,
+        default: Date.now(),
     }
 })
 

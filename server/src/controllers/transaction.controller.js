@@ -26,8 +26,7 @@ export const getAllTransactions = async (req, res) => {
         }
     } catch (error) {
         // Server Response
-        console.log("GETTING_TRANSACTION_ERROR")
-        console.log(error)
+        console.log(`ERROR: ` + error.message)
         // Web Response
         res.status(500).json({
             message: "An Error Occured.",
@@ -62,7 +61,7 @@ export const createTransaction = async(req, res) => {
         }
     } catch (error) {
         // Server Response
-        console.log("CREATING_TRANSACTION_ERROR")
+        console.log(`ERROR: ` + error.message)
         // Web Response
         res.status(500).json({
             message: "Creating Transaction Failed.",
@@ -94,7 +93,7 @@ export const deleteTransaction = async(req, res) => {
         }
     } catch (error) {
         // Server Response
-        console.log("DELETING_TRANSACTION_ERROR")
+        console.log(`ERROR: ` + error.message)
         // Web Response
         res.status(500).json({
             message: "Deleting Transaction Error.",
