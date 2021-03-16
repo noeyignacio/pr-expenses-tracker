@@ -4,15 +4,15 @@
 
     let transactions = [];
 
-    // Random Generated AplhanNumerics
-    let r = Math.random().toString(36).substring(7).toUpperCase();
-
     onMount(async () => {
-        const { data } = await axios.get("/api/v1/transaction/getAll")
-        transactions = data;
+        try {
+            const { data } = await axios.get("/api/v1/transaction/getAll")
+            transactions = data;
+        } catch (error) {
+            console.log(error);
+        }
+        
     });
-    
-    
 </script>
 
 
@@ -21,11 +21,24 @@
     <div class="col-sm-6">
         <div class="card">
             <div class="card-body">
-            <h5 class="card-title">Amount: $ {transaction.amount}.00</h5>
-            <p class="card-text tranid">Transaction ID: {r}{transaction._id.toUpperCase()}</p>
+            <h5 class="card-title">
+                Amount: $ {transaction.amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}.00
+                {#if transaction.isExpenses == true}
+                    <span class="badge bg-warning">Expenses</span>
+                        {:else}
+                        <span class="badge bg-info">Income</span>
+                {/if}
+            </h5>
+            <p class="card-text tranid">Transaction ID: 
+                {transaction._id.toUpperCase()}
+            </p>
+            <p class="card-text text-muted">
+                Date: {transaction.createdAt}
+            </p>
             <a href="/" class="btn btn-danger">Remove</a>
             </div>
         </div>
+        
     </div>
     {/each}
 </div>

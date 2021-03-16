@@ -1,18 +1,28 @@
 <script>
-    // import axios from 'axios';
-    // import { onMount } from 'svelte'
+    import axios from 'axios';
 
     // Components
     import Transactions from './Transactions.svelte'
 
     let input;
+    let transactions = [];
     let method = "Expenses";
-    
 
-    // onMount(async () => {
-    //     const { data } = await axios.get("/api/v1/transaction/getAll")
-    //     transactions = data;
-    // });
+    const addTransactions = async () => {
+        try {
+            const transaction = {
+                createdAt: new Date().getDate(),
+                amount: input,
+                
+            };
+            const response = await axios.post("/api/v1/transaction/create", transaction);
+            transactions = [response.data, ...transactions]
+            input = "";
+        } catch (error) {
+            console.log(error)
+        }
+    }
+    
 </script>
 
 <div class="container">
@@ -37,7 +47,13 @@
         </div>
         <div class="col-sm">
             <div class="d-grid gap-2">
-                <button class="btn btn-success" type="button">Add</button>
+                <button 
+                    class="btn btn-success" 
+                    type="button"
+                    on:click={addTransactions}
+                >
+                    Add
+                </button>
               </div>
         </div>
     </div>
@@ -49,9 +65,9 @@
                 <h5 class="card-title">
                     ₱ {input}.00
                     {#if method == "Expenses"}
-                    <span class="badge bg-danger">Expenses</span>
+                    <span class="badge bg-warning">Expenses</span>
                         {:else}
-                        <span class="badge bg-success">Income</span>
+                        <span class="badge bg-info">Income</span>
                     {/if}
                 </h5>
             {/if}
