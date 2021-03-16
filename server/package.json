@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "start:server": "nodemon src/index.js",
-    "start:client" : "cd .. && cd client && npm run dev",
+    "start:client": "cd .. && cd client && npm run dev",
     "dev:watch": "concurrently -n 'SERVER,CLIENT' -c 'red,blue' \"npm run start:server\" \"npm run start:client\""
   },
   "author": "Francis Ignacio",

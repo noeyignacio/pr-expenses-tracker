@@ -42,6 +42,7 @@ export const createTransaction = async(req, res) => {
             amount: req.body.amount,
             isExpenses: req.body.isExpenses,
             isAdded: true,
+            transactionMethod: req.body.transactionMethod,
         })
         const transaction = await createTransactionValidator.validateAsync(req.body)
         if (transaction) {
