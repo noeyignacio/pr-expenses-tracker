@@ -30,7 +30,7 @@
                 {/if}
             </h5>
             <p class="card-text tranid">Transaction ID: 
-                {transaction._id.toUpperCase()}
+                {transaction._id.replace(/([^.]{16}$)/g, "***").toUpperCase()}
             </p>
             <p class="card-text text-muted">
                 Date: {transaction.createdAt}
