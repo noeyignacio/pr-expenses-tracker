@@ -13,11 +13,18 @@
         }
         
     });
+
+    const removeTransaction = async (id) => {
+        const response = await axios.delete("/api/v1/transaction/delete/" + id)
+        if (response.data.id === id) {
+            transactions = transactions.filter(t => t._id !== id)
+        }
+    }
 </script>
 
 <br>
 <div class="row">
-    {#each transactions as transaction}
+    {#each transactions as transaction (transaction._id)}
     <div class="col-sm-6">
         <div class="card border-dark mb-3">
             <div class="card-body">
@@ -35,7 +42,12 @@
             <p class="card-text text-muted">
                 Date: {transaction.createdAt}
             </p>
-            <a href="/" class="btn-sm btn-danger">Remove</a>
+            <button 
+                class="btn-sm btn-danger" 
+                on:click={() => removeTransaction(transaction._id)}
+            >
+                Remove
+            </button>
             </div>
         </div>
         
