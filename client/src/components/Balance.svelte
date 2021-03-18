@@ -4,7 +4,7 @@
 
     let transactions = [];
 
-    $: balance = transactions.reduce((acc, t) => acc + t.amount, 0)
+    $: balance = transactions.reduce((acc, t) => acc + t.amount, 0);
 
     onMount(async () => {
         try {
@@ -19,8 +19,14 @@
 <div class="card text-center">
     <div class="card-body">
             <h5 class="card-title">
-                ₱ {transactions.length == 0 ? '0' : `${balance}`} .00       
+                ₱ {transactions.length == 0 ? '0' : `${balance.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}`} .00       
             </h5>
-        <p class="card-text">Remaining Balance</p>
+        <p class="card-text">Remaining {balance.toString().includes("-") ? 'Debt' : 'Balance'}</p>
     </div>
 </div>
+
+<style>
+    .card {
+        border-style: dashed;
+    }
+</style>

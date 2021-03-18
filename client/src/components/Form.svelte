@@ -6,6 +6,7 @@
     import Transactions from './Transactions.svelte'
     import NoTransaction from './NoTransaction.svelte'
     import Balance from './Balance.svelte'
+    import History from './History.svelte'
 
     let input;
     let transactions = [];
@@ -41,7 +42,7 @@
                     };
                     const response = await axios.post("/api/v1/transaction/create", expenses);
                     transactions = [response.data, ...transactions]
-                    input;
+                    input; 
                 } else {
                     const response = await axios.post("/api/v1/transaction/create", transaction);
                     transactions = [response.data, ...transactions]
@@ -58,6 +59,7 @@
 </script>
 
 <div class="container">
+    <History />
     <div class="row">
         <div class="col-sm">
             <select class="form-select" aria-label="Select Method" bind:value={method}>                
@@ -91,14 +93,14 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-7">
+        <div class="col-8">
             <div class="card text-center">
                 <div class="card-body">
                     {#if input == null}
                     <h5 class="card-title">₱ 0.00</h5>
                         {:else}
                         <h5 class="card-title">
-                            ₱ {input}.00
+                            ₱ {input.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}.00
                             {#if method == "Expenses"}
                             <span class="badge bg-warning">Expenses</span>
                                 {:else}
@@ -110,7 +112,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-5">
+        <div class="col-4">
             <Balance/>
         </div>
     </div>

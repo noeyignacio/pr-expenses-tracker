@@ -27,7 +27,9 @@
         <div class="card border-{transaction.transactionMethod == "Expenses" ? 'warning' : 'info'} mb-3">
             <div class="card-body">
             <h5 class="card-title">
-                Amount: $ {transaction.amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}.00
+                Amount: ₱  { transaction.transactionMethod == "Expenses" 
+                    ? (transaction.amount*-1).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") 
+                    : transaction.amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}.00
                 {#if transaction.transactionMethod == "Expenses"}
                     <span class="badge rounded-pill bg-warning">Expenses</span>
                         {:else}
@@ -64,10 +66,6 @@
     }
     span {
         font-size: 12px;
-    }
-    a {
-        color: #ffffff;
-        text-decoration: none;
     }
     .tranid {
         overflow:hidden;
