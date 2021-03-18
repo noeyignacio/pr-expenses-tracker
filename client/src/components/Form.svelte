@@ -1,12 +1,26 @@
 <script>
     import axios from 'axios';
+    import { onMount } from 'svelte'
 
     // Components
     import Transactions from './Transactions.svelte'
+    import NoTransaction from './NoTransaction.svelte'
 
     let input;
     let transactions = [];
     let method;
+
+    $: disabled = input === null;
+
+
+    onMount(async () => {
+        try {
+            const { data } = await axios.get("/api/v1/transaction/getAll")            
+            transactions = data;
+        } catch (error) {
+            console.log(error);
+        } 
+    });
 
     const addTransactions = async () => {
         try {
@@ -15,9 +29,14 @@
                 amount: input,
                 transactionMethod: method
             };
-            const response = await axios.post("/api/v1/transaction/create", transaction);
-            transactions = [response.data, ...transactions]
-            input = 0;
+            if (!transaction.amount) {
+                console.log("Input Something.")
+            } else {
+                const response = await axios.post("/api/v1/transaction/create", transaction);
+                transactions = [response.data, ...transactions]
+                input;
+            }
+            
         } catch (error) {
             console.log(error)
         }
@@ -51,6 +70,7 @@
                     class="btn btn-success" 
                     type="button"
                     on:click={addTransactions}
+                    {disabled}
                 >
                     Add
                 </button>
@@ -75,7 +95,11 @@
         </div>
     </div>
     <div>
+        {#if transactions.length > 0}
         <Transactions />
+        {:else}
+        <NoTransaction />
+        {/if}
     </div>
     
 </div>

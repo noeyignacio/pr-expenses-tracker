@@ -6,12 +6,11 @@
 
     onMount(async () => {
         try {
-            const { data } = await axios.get("/api/v1/transaction/getAll")
+            const { data } = await axios.get("/api/v1/transaction/getAll")            
             transactions = data;
         } catch (error) {
             console.log(error);
-        }
-        
+        } 
     });
 
     const removeTransaction = async (id) => {
@@ -54,6 +53,7 @@
     </div>
     {/each}
 </div>
+
 
 
 <style>
