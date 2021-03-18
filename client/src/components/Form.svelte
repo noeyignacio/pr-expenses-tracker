@@ -6,7 +6,7 @@
     import Transactions from './Transactions.svelte'
     import NoTransaction from './NoTransaction.svelte'
     import Balance from './Balance.svelte'
-    import History from './History.svelte'
+    import UpperButtons from './UpperButtons.svelte'
 
     let input;
     let transactions = [];
@@ -59,7 +59,7 @@
 </script>
 
 <div class="container">
-    <History />
+    <UpperButtons />
     <div class="row">
         <div class="col-sm">
             <select class="form-select" aria-label="Select Method" bind:value={method}>                
@@ -123,7 +123,6 @@
         <NoTransaction />
         {/if}
     </div>
-    
 </div>
 
 <style>

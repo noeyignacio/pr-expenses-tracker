@@ -16,14 +16,10 @@
 
 </script>
 
-<div class="row">
-    <div class="col-4">
-        <div class="d-grid gap-2">
-            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#bHistory">
-                Balance History
-            </button>
-        </div>
-    </div>
+<div class="d-grid gap-2 bHBtn">
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#bHistory">
+        Balance History
+    </button>
 </div>
 
 
@@ -67,10 +63,8 @@
     </div>
 </div>
 
-
-
 <style>
-    .row {
+    .bHBtn {
         padding-bottom: 10px;
     }
     .card {
