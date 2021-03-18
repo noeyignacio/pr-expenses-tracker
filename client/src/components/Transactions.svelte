@@ -21,11 +21,10 @@
     }
 </script>
 
-<br>
 <div class="row">
     {#each transactions as transaction (transaction._id)}
     <div class="col-sm-6">
-        <div class="card border-dark mb-3">
+        <div class="card border-{transaction.transactionMethod == "Expenses" ? 'warning' : 'info'} mb-3">
             <div class="card-body">
             <h5 class="card-title">
                 Amount: $ {transaction.amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}.00

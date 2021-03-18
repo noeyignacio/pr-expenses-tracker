@@ -5,13 +5,14 @@
     // Components
     import Transactions from './Transactions.svelte'
     import NoTransaction from './NoTransaction.svelte'
+    import Balance from './Balance.svelte'
 
     let input;
     let transactions = [];
     let method;
 
     $: disabled = input === null;
-
+    
 
     onMount(async () => {
         try {
@@ -32,9 +33,21 @@
             if (!transaction.amount) {
                 console.log("Input Something.")
             } else {
-                const response = await axios.post("/api/v1/transaction/create", transaction);
-                transactions = [response.data, ...transactions]
-                input;
+                if(transaction.transactionMethod == "Expenses") {
+                    const expenses = {
+                        createdAt: new Date().getDate(),
+                        amount: input * -1,
+                        transactionMethod: method
+                    };
+                    const response = await axios.post("/api/v1/transaction/create", expenses);
+                    transactions = [response.data, ...transactions]
+                    input;
+                } else {
+                    const response = await axios.post("/api/v1/transaction/create", transaction);
+                    transactions = [response.data, ...transactions]
+                    input;
+                }
+                
             }
             
         } catch (error) {
@@ -77,21 +90,28 @@
               </div>
         </div>
     </div>
-    <div class="card text-center">
-        <div class="card-body">
-            {#if input == null}
-            <h5 class="card-title">₱ 0.00</h5>
-                {:else}
-                <h5 class="card-title">
-                    ₱ {input}.00
-                    {#if method == "Expenses"}
-                    <span class="badge bg-warning">Expenses</span>
+    <div class="row">
+        <div class="col-7">
+            <div class="card text-center">
+                <div class="card-body">
+                    {#if input == null}
+                    <h5 class="card-title">₱ 0.00</h5>
                         {:else}
-                        <span class="badge bg-info">Income</span>
+                        <h5 class="card-title">
+                            ₱ {input}.00
+                            {#if method == "Expenses"}
+                            <span class="badge bg-warning">Expenses</span>
+                                {:else}
+                                <span class="badge bg-info">Income</span>
+                            {/if}
+                        </h5>
                     {/if}
-                </h5>
-            {/if}
-            <p class="card-text">Make sure you're putting the right amount.</p>
+                    <p class="card-text">Make sure you're putting the right amount.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-5">
+            <Balance/>
         </div>
     </div>
     <div>
