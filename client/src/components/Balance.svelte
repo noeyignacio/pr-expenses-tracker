@@ -21,7 +21,7 @@
             <h5 class="card-title">
                 ₱ {transactions.length == 0 ? '0' : `${balance.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}`} .00       
             </h5>
-        <p class="card-text">Remaining {balance.toString().includes("-") ? 'Debt' : 'Balance'}</p>
+        <p class="card-text">{balance == 0 ? 'Balance' : `Remaining ${balance.toString().includes("-") ? 'Debt' : 'Balance'}`}</p>
     </div>
 </div>
 
