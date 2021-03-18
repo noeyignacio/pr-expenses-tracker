@@ -1,5 +1,6 @@
 <script>
     import axios from 'axios'
+    import moment from 'moment'
     import { onMount } from 'svelte'
 
     let transactions = [];
@@ -38,8 +39,19 @@
                     {#each transactions as transaction}
                     <div class="card">
                         <div class="card-body">
-                        <h5 class="card-title">₱ {(transaction.amount*-1).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}.00 <span class="badge bg-warning text-dark">{transaction.transactionMethod == "Expenses" ? 'Expenses' : 'Income'}</span></h5>
-                        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                        <h5 class="card-title">₱ { transaction.transactionMethod == "Expenses" 
+                            ? (transaction.amount*-1).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") 
+                            : (transaction.amount).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}.00 
+                        <span 
+                            class="badge bg-{transaction.transactionMethod == "Expenses" 
+                            ? 'warning' 
+                            : 'info'} text-dark">
+                            { transaction.transactionMethod == "Expenses" 
+                            ? 'Expenses' 
+                            : 'Income'}
+                        </span>
+                        </h5>
+                        <p class="card-text text-muted">Date: {moment(transaction.createdAt).format('MMMM Do YYYY, h:mm:ss a')}</p>
                         </div>
                     </div>
                     {/each}
@@ -50,11 +62,7 @@
                         </div>
                     </div>
                 {/if}
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
-            </div>
+            </div>            
         </div>
     </div>
 </div>

@@ -1,5 +1,6 @@
 <script>
     import axios from 'axios';
+    import moment from 'moment'
     import { onMount } from 'svelte'
 
     let transactions = [];
@@ -40,7 +41,7 @@
                 {transaction._id.replace(/([^.]{16}$)/g, "***").toUpperCase()}
             </p>
             <p class="card-text text-muted">
-                Date: {transaction.createdAt}
+                Date: {moment(transaction.createdAt).format('MMMM Do YYYY, h:mm:ss a')}
             </p>
             <button 
                 class="btn-sm btn-danger" 
