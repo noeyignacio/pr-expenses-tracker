@@ -19,17 +19,21 @@
 ![Whole Project](https://i.imgur.com/suP1LVe.png)
 
 ##### 2. Balance History
-![Whole Project](https://i.imgur.com/XhwhYQP.png)
+![Balance History](https://i.imgur.com/XhwhYQP.png)
+
+#### 3. Only 3 API Endpoints
+![API Endpoints](https://i.imgur.com/zpsTWHP.png)
+
 
 
 ---
 #### ❓ **How to install?**
 1. `$ git clone <https://github.com/noeyignacio/project-expenses-tracker.git> `
 2. go to the directory then `$ cd server`
-3. `npm i` or `npm install`
-4. `npm run dev:watch` - it would run both *backend (dir: server)* and *frontend (dir: client)*
+3. `$ npm i` or `$ npm install`
+4. `$ npm run dev:watch` - it would run both *backend (dir: server)* and *frontend (dir: client)*
 
-##### Note: `.env` is not included in the github repository, make sure you'll make your own for it to run.
+##### Note: `.env` is not included in the github repository, make sure you'll make your own for it to run. Other `scripts` are in `package.json` both `server` and `client` directories.
 
 ---
 #### ⚙️ **Current Technologies/Packages/Dependencies Used**
