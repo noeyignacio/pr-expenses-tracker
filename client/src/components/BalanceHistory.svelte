@@ -1,18 +1,7 @@
 <script>
-    import axios from 'axios'
     import moment from 'moment'
-    import { onMount } from 'svelte'
 
-    let transactions = [];
-
-    onMount(async () => {
-        try {
-            const { data } = await axios.get("/api/v1/transaction/getAll")            
-            transactions = data;
-        } catch (error) {
-            console.log(error);
-        } 
-    });
+    export let transactions = [];
 
 </script>
 

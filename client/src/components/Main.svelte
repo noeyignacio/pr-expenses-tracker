@@ -1,24 +1,28 @@
 <script>
     import axios from 'axios';
     import { onMount } from 'svelte'
-
+    
     // Components
+    import Navbar from './Navbar.svelte'
     import Transactions from './Transactions.svelte'
     import NoTransaction from './NoTransaction.svelte'
     import Balance from './Balance.svelte'
-    import UpperButtons from './UpperButtons.svelte'
+    import BalanceHistory from './BalanceHistory.svelte'
+    import LoadingSpinner from './LoadingSpinner.svelte'
 
     let input;
-    let transactions = [];
     let method;
+    let loading = false;
+    let transactions =[]
 
     $: disabled = input === null;
     
-
     onMount(async () => {
         try {
+            loading = true;
             const { data } = await axios.get("/api/v1/transaction/getAll")            
             transactions = data;
+            loading = false;
         } catch (error) {
             console.log(error);
         } 
@@ -54,12 +58,17 @@
         } catch (error) {
             console.log(error)
         }
-    }
-    
+    }    
 </script>
 
+<Navbar />
 <div class="container">
-    <UpperButtons />
+
+    <div class="row">
+        <div class="col-4">
+            <BalanceHistory {transactions}/>
+        </div>
+    </div>
     <div class="row">
         <div class="col-sm">
             <select class="form-select" aria-label="Select Method" bind:value={method}>                
@@ -113,12 +122,15 @@
             </div>
         </div>
         <div class="col-4">
-            <Balance/>
+            <Balance {transactions}/>
         </div>
     </div>
     <div>
+        {#if loading }
+        <LoadingSpinner />
+        {/if}
         {#if transactions.length > 0}
-        <Transactions />
+        <Transactions {transactions}/>
         {:else}
         <NoTransaction />
         {/if}

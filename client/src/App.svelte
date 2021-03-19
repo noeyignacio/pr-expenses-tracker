@@ -1,11 +1,9 @@
 <script>
-	import Navbar from './components/Navbar.svelte'
-	import Form from './components/Form.svelte'
+	import Main from './components/Main.svelte'
 </script>
 
 <main>
-	<Navbar />
-	<Form />
+	<Main />
 </main>
 
 <style>

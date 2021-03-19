@@ -1,20 +1,10 @@
 <script>
     import axios from 'axios';
     import moment from 'moment'
-    import { onMount } from 'svelte'
 
-    let transactions = [];
+    export let transactions = [];
 
-    onMount(async () => {
-        try {
-            const { data } = await axios.get("/api/v1/transaction/getAll")            
-            transactions = data;
-        } catch (error) {
-            console.log(error);
-        } 
-    });
-
-    const removeTransaction = async (id) => {
+    export const removeTransaction = async (id) => {
         const response = await axios.delete("/api/v1/transaction/delete/" + id)
         if (response.data.id === id) {
             transactions = transactions.filter(t => t._id !== id)
