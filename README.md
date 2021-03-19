@@ -22,7 +22,7 @@
 ![Balance History](https://i.imgur.com/XhwhYQP.png)
 
 #### 3. Only 3 API Endpoints
-![API Endpoints](https://i.imgur.com/zpsTWHP.png)
+![API Endpoints](https://i.imgur.com/NWHSll3.png)
 
 
 
